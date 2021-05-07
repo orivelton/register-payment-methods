@@ -5,7 +5,12 @@ import { useContext, useEffect } from 'react'
 import cardsContext from '../../hooks/context/cardsContext'
 import { cardsRequest } from '../../services/cardsRequest'
 
-export default function FormCard() {
+export default function FormCard({
+  nameInCard = '',
+  cardNumber = '',
+  expiryDate = '',
+  cvc = ''
+}) {
   const[cards, setCards] = useContext(cardsContext)
   const { register, handleSubmit, watch, formState: { errors } } = useForm<Card>()
 
@@ -26,7 +31,7 @@ export default function FormCard() {
         name: 'nameInCard', 
         label: 'Name in card', 
         placeholder: 'John Doe',
-        defaultValue: 'Orivelton'
+        defaultValue: nameInCard
       }} />
       {errors.nameInCard && <p>Please fill in your name</p>}
 
@@ -39,7 +44,7 @@ export default function FormCard() {
         placeholder: '0000 0000 0000 0000', 
         pattern: /^[0-9]{16}$/,  
         maxLength: 16,
-        defaultValue: '0000000000000000'
+        defaultValue: cardNumber
       }} />
       {errors.cardNumber && <p>Please enter a valid credit card number</p>}
 
@@ -52,7 +57,7 @@ export default function FormCard() {
         placeholder: '00/00', 
         pattern: /^[0-9]{5}$/,  
         maxLength: 5,
-        defaultValue: '00000'
+        defaultValue: expiryDate
       }} />
       {errors.cardNumber && <p>Please enter a valid expiry date</p>}
 
@@ -65,7 +70,7 @@ export default function FormCard() {
         placeholder: '000', 
         pattern: /^[0-9]{3}$/,  
         maxLength: 3,
-        defaultValue: '123'
+        defaultValue: cvc
       }} />
       {errors.cardNumber && <p>Please enter a valid security code</p>}
 
