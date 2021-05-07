@@ -4,9 +4,29 @@ import { Card } from '../../interfaces'
 
 export default function FormCard() {
   const { register, handleSubmit, watch, formState: { errors } } = useForm<Card>()
-  const onSubmit = (data: Card )=> console.log(data)
+  const onSubmit = (data: Card )=> {
+    console.log(data)
+  }
+
+  const saveCard = async () => {
+    const result = await fetch('/api/newCard', {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        cards: [{
+          nameInCard: 'Ori',
+          cardNumber: '0000000000000000',
+          expiryDate: '00/00',
+          cvc: 'cvc'
+        }]
+      })
+    })
+  }
 
   return(
+    <>
     <form onSubmit={handleSubmit(onSubmit)}>
       <Input {...{ 
         register, 
@@ -56,5 +76,8 @@ export default function FormCard() {
 
       <button>Confirm</button>
     </form>
+
+    <button onClick={saveCard}>Cookie</button>
+    </>
   ) 
 }

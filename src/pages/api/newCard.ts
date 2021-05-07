@@ -1,9 +1,8 @@
-import cookie from "cookie";
-
+import cookie from 'cookie'
 export default (req, res) => {
   res.setHeader(
     "Set-Cookie",
-    cookie.serialize("cards", req.body.token, {
+    cookie.serialize("cards", JSON.stringify(req.body.cards), {
       httpOnly: true,
       secure: process.env.NODE_ENV !== "development",
       maxAge: 2600000,
@@ -12,5 +11,5 @@ export default (req, res) => {
     })
   );
   res.statusCode = 200;
-  res.json({ success: true });
-};
+  res.json({ success: true })
+}
