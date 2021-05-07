@@ -15,4 +15,5 @@ export type InputCard = {
   maxLength?: number,
   required?: boolean,
   pattern?: RegExp,
+  defaultValue?: any
 }

@@ -1,29 +1,22 @@
 import { useForm } from 'react-hook-form'
 import Input from '../Input'
 import { Card } from '../../interfaces'
+import { useContext, useEffect } from 'react'
+import cardsContext from '../../hooks/context/cardsContext'
+import { cardsRequest } from '../../services/cardsRequest'
 
 export default function FormCard() {
+  const[cards, setCards] = useContext(cardsContext)
   const { register, handleSubmit, watch, formState: { errors } } = useForm<Card>()
-  const onSubmit = (data: Card )=> {
-    console.log(data)
-  }
 
-  const saveCard = async () => {
-    const result = await fetch('/api/newCard', {
-      method: 'POST',
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        cards: [{
-          nameInCard: 'Ori',
-          cardNumber: '0000000000000000',
-          expiryDate: '00/00',
-          cvc: 'cvc'
-        }]
-      })
-    })
+
+  const onSubmit = async (data: Card ) => {
+    setCards(prev => ([...prev, data]))
   }
+  
+  useEffect(() => {
+    cardsRequest({ cards })
+  }, [cards])
 
   return(
     <>
@@ -32,7 +25,8 @@ export default function FormCard() {
         register, 
         name: 'nameInCard', 
         label: 'Name in card', 
-        placeholder: 'John Doe'
+        placeholder: 'John Doe',
+        defaultValue: 'Orivelton'
       }} />
       {errors.nameInCard && <p>Please fill in your name</p>}
 
@@ -44,7 +38,8 @@ export default function FormCard() {
         label: 'Card number', 
         placeholder: '0000 0000 0000 0000', 
         pattern: /^[0-9]{16}$/,  
-        maxLength: 16
+        maxLength: 16,
+        defaultValue: '0000000000000000'
       }} />
       {errors.cardNumber && <p>Please enter a valid credit card number</p>}
 
@@ -55,8 +50,9 @@ export default function FormCard() {
         name: 'expiryDate', 
         label: 'Expiry date', 
         placeholder: '00/00', 
-        pattern: /^[0-9]{4}$/,  
-        maxLength: 5
+        pattern: /^[0-9]{5}$/,  
+        maxLength: 5,
+        defaultValue: '00000'
       }} />
       {errors.cardNumber && <p>Please enter a valid expiry date</p>}
 
@@ -68,7 +64,8 @@ export default function FormCard() {
         label: 'CVC (Security code)', 
         placeholder: '000', 
         pattern: /^[0-9]{3}$/,  
-        maxLength: 3
+        maxLength: 3,
+        defaultValue: '123'
       }} />
       {errors.cardNumber && <p>Please enter a valid security code</p>}
 
@@ -76,8 +73,6 @@ export default function FormCard() {
 
       <button>Confirm</button>
     </form>
-
-    <button onClick={saveCard}>Cookie</button>
     </>
   ) 
 }
