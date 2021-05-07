@@ -1,3 +1,4 @@
+import FormCard from '../components/FormCard'
 import Modal from '../components/Modal'
 
 export default function Index() {
@@ -7,8 +8,7 @@ export default function Index() {
       <h2>Add, edit or delete your cards any time</h2>
 
       <button>Add card</button>
-
-      <Modal />
+      <FormCard />
     </>
   )
 }
