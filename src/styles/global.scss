@@ -1,0 +1,45 @@
+@import './utils.scss';
+
+@font-face {
+  font-family: 'Circular Book';
+  src: url('/fonts/lineto-circular-pro-book.woff2') format('woff2'),
+      url('/fonts/lineto-circular-pro-book.woff') format('woff'),
+      url('/fonts/lineto-circular-pro-book.woff') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+* {
+  font-family: 'Circular Book', 'Arial Narrow', Arial, sans-serif;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+::-webkit-input-placeholder {
+  color: $grey-20;
+  font-weight: 400;
+  font-family: 'Circular Book';
+}
+
+input:focus {
+  outline: none;
+  border-width: 2px;
+}
+
+.title {
+  color: $purple-90;
+  font-weight: bold;
+  font-size: em(30);
+  &__secondary {
+    
+  }
+}
+
+.subtitle {
+  color: $grey-90;
+  font-size: em(16);
+
+}

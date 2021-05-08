@@ -5,6 +5,7 @@ import { useContext, useEffect } from 'react'
 import cardsContext from '../../hooks/context/cardsContext'
 import { cardsRequest } from '../../services/cardsRequest'
 import Modal from '../Modal'
+import Button from '../Button'
 
 export default function FormCard({ card, handleClose, newCard = false, id }) {
   const [cards, setCards] = useContext(cardsContext)
@@ -35,6 +36,7 @@ export default function FormCard({ card, handleClose, newCard = false, id }) {
 
   return(
     <Modal handleClose={handleClose}>
+      <h3 className="title__secondary">Add your card details</h3>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Input {...{ 
           register, 
@@ -86,8 +88,7 @@ export default function FormCard({ card, handleClose, newCard = false, id }) {
         }} />
         <br />
 
-
-        <button>Confirm</button>
+        <Button type="submit" text="Confirm" />
         {errors?.formError && errors.formError.message}
       </form>
     </Modal>

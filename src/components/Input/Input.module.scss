@@ -1,0 +1,40 @@
+@import '../../styles/utils.scss';
+.field {
+  margin-bottom: em(10);
+}
+
+
+.label {
+  font-size: em(13);
+  color: $grey-90;
+  font-weight: bold;
+  width: 100%;
+  display: block;
+  margin-bottom: em(5);
+}
+
+.input {
+  border: 0;
+  width: 100%;
+  border-bottom: em(1) solid $grey-20;
+  padding: em(5) 0;
+  font-size: em(16);
+  &__error {
+    color: $red-30;
+    border-bottom-color: $red-30;
+    background: url('/images/form-error.svg') no-repeat right;
+  }
+
+  &__valid {
+    color: $green-30;
+    border-bottom-color: $green-30;
+    background: url('/images/form-success.svg') no-repeat right top;
+  }
+}
+
+.error {
+  margin-top: em(7);
+  color: $red-30;
+  font-size: em(13);
+  font-weight: lighter;
+}

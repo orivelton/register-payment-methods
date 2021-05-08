@@ -1,4 +1,5 @@
 import cookie from 'cookie'
+
 export default (req, res) => {
   res.setHeader(
     "Set-Cookie",

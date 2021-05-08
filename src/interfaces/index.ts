@@ -18,3 +18,10 @@ export type InputCard = {
   pattern?: RegExp,
   defaultValue?: any
 }
+
+export type ButtonType = {
+  text: string,
+  type: string,
+  onClick: Function,
+  disabled?: boolean
+}

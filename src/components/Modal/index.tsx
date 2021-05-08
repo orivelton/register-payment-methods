@@ -6,7 +6,7 @@ export default function Modal({ children, handleClose }) {
     <>
       <div className={styles.overlay} onClick={() => { handleClose(false) }}></div>
       <div className={styles.modal}>
-      <button onClick={() => { handleClose(false) }}>X</button>
+      <button className={styles.modal__close} onClick={() => { handleClose(false) }}>X</button>
         {children}
       </div>
     </>

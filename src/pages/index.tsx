@@ -1,9 +1,8 @@
 import { useState } from 'react'
+import Button from '../components/Button'
 import FormCard from '../components/FormCard'
 import ListCard from '../components/ListCard'
-import Modal from '../components/Modal'
 import cardsContext from '../hooks/context/cardsContext'
-// import Modal from '../components/Modal'
 
 export default function Index({ cards }) {
   const [card, setCard] = useState(cards || [])
@@ -16,9 +15,9 @@ export default function Index({ cards }) {
 
   return(
     <>
-      <h1>Your cards</h1>
-      <h2>Add, edit or delete your cards any time</h2>
-      <button onClick={handleAddCard}>Add new card</button>
+      <h1 className="title">Your cards</h1>
+      <h2 className="subtitle">Add, edit or delete your cards any time</h2>
+      <Button text="Add new card" onClick={handleAddCard}/>
 
       <br />
       <cardsContext.Provider value={[card, setCard]}>
