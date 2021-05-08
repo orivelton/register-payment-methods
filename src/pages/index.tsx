@@ -18,7 +18,7 @@ export default function Index({ cards }) {
     <>
       <h1>Your cards</h1>
       <h2>Add, edit or delete your cards any time</h2>
-      <button onClick={handleAddCard}>Add card</button>
+      <button onClick={handleAddCard}>Add new card</button>
 
       <br />
       <cardsContext.Provider value={[card, setCard]}>

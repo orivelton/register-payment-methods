@@ -11,14 +11,15 @@ export default function FormCard({ card, handleClose, newCard = false, id }) {
   const { register, handleSubmit, setError, reset, watch, setValue, formState: { errors } } = useForm<Card>({ defaultValues: card || {}})
 
   const onSubmit = async (data: Card ) => {
+    newCard ? addCard(data) : editCard(data)
+    
+  }
+  
+  const addCard = (data) => {
     const hasCard = cards.filter(item => item.cardNumber === data.cardNumber).length
-
+    console.log(hasCard)
     if(hasCard && newCard) return setError('formError', { type: "manual", message: "You have the same card added"})
 
-    newCard ? addCard(data) : editCard(data)
-  }
-
-  const addCard = (data) => {
     setCards(prev => ([...prev, data]))
     handleClose(false)
   }
