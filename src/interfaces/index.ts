@@ -5,6 +5,7 @@ export type Card = {
   cardNumber: string,
   expiryDate: string,
   cvc: string,
+  formError?: string
 }
 
 export type InputCard = { 

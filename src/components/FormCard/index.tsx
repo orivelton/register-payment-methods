@@ -1,83 +1,89 @@
 import { useForm } from 'react-hook-form'
 import Input from '../Input'
 import { Card } from '../../interfaces'
-import { useContext, useEffect } from 'react'
+import { useContext, useEffect, useMemo } from 'react'
 import cardsContext from '../../hooks/context/cardsContext'
 import { cardsRequest } from '../../services/cardsRequest'
+import Modal from '../Modal'
 
-export default function FormCard({
-  nameInCard = '',
-  cardNumber = '',
-  expiryDate = '',
-  cvc = ''
-}) {
+export default function FormCard({ card, handleClose }) {
   const[cards, setCards] = useContext(cardsContext)
-  const { register, handleSubmit, watch, formState: { errors } } = useForm<Card>()
-
+  const { register, handleSubmit, setError, reset, watch, setValue, formState: { errors } } = useForm<Card>({ defaultValues: card || {}})
 
   const onSubmit = async (data: Card ) => {
+    const hasCard = cards.filter(item => item.cardNumber === data.cardNumber).length
+
+    if(hasCard) {
+      return setError('formError', {
+        type: "manual",
+        message: "You have the same card added"
+      })
+    }
+
     setCards(prev => ([...prev, data]))
   }
   
-  useEffect(() => {
-    cardsRequest({ cards })
-  }, [cards])
+  useEffect(() => { cardsRequest({ cards }) }, [cards])
+
+  useEffect(() => { reset(card) }, [card])
 
   return(
-    <>
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <Input {...{ 
-        register, 
-        name: 'nameInCard', 
-        label: 'Name in card', 
-        placeholder: 'John Doe',
-        defaultValue: nameInCard
-      }} />
-      {errors.nameInCard && <p>Please fill in your name</p>}
+    <Modal handleClose={handleClose}>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <Input {...{ 
+          register, 
+          name: 'nameInCard', 
+          label: 'Name in card', 
+          placeholder: 'John Doe',
+          errors,
+          message: 'Please fill in your name'
+        }} />
+        
 
-      <br />
+        <br />
 
-      <Input {...{ 
-        register, 
-        name: 'cardNumber', 
-        label: 'Card number', 
-        placeholder: '0000 0000 0000 0000', 
-        pattern: /^[0-9]{16}$/,  
-        maxLength: 16,
-        defaultValue: cardNumber
-      }} />
-      {errors.cardNumber && <p>Please enter a valid credit card number</p>}
+        <Input {...{ 
+          register, 
+          name: 'cardNumber', 
+          label: 'Card number', 
+          placeholder: '0000 0000 0000 0000', 
+          pattern: /^[0-9]{16}$/,  
+          maxLength: 16,
+          errors,
+          message: 'Please enter a valid credit card number'
+        }} />
 
-      <br />
+        <br />
 
-      <Input {...{ 
-        register, 
-        name: 'expiryDate', 
-        label: 'Expiry date', 
-        placeholder: '00/00', 
-        pattern: /^[0-9]{5}$/,  
-        maxLength: 5,
-        defaultValue: expiryDate
-      }} />
-      {errors.cardNumber && <p>Please enter a valid expiry date</p>}
+        <Input {...{ 
+          register, 
+          name: 'expiryDate', 
+          label: 'Expiry date', 
+          placeholder: '00/00', 
+          pattern: /^[0-9]{5}$/,  
+          maxLength: 5,
+          errors,
+          message: 'Please enter a valid expiry date'
+        }} />
 
-      <br />
-      
-      <Input {...{ 
-        register, 
-        name: 'cvc', 
-        label: 'CVC (Security code)', 
-        placeholder: '000', 
-        pattern: /^[0-9]{3}$/,  
-        maxLength: 3,
-        defaultValue: cvc
-      }} />
-      {errors.cardNumber && <p>Please enter a valid security code</p>}
+        <br />
+        
+        <Input {...{ 
+          register, 
+          name: 'cvc', 
+          label: 'CVC (Security code)', 
+          placeholder: '000', 
+          pattern: /^[0-9]{3}$/,  
+          maxLength: 3,
+          errors,
+          message: 'Please enter a valid security code'
+        }} />
+        <br />
 
-      <br />
 
-      <button>Confirm</button>
-    </form>
-    </>
+        <button>Confirm</button>
+        {errors?.formError && errors.formError.message}
+      </form>
+    </Modal>
   ) 
 }

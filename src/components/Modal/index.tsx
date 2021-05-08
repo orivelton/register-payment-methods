@@ -1,10 +1,12 @@
-import './Modal.module.scss'
+import { useState } from 'react'
+import styles from './Modal.module.scss'
 
-export default function Modal({ children }) {
+export default function Modal({ children, handleClose }) {
   return(
-    <div className="modal">
-      test
-      <div className="modal__overlay"></div>
-    </div>
+    <>
+      <div className={styles.overlay} onClick={() => { handleClose(false) }}>
+      </div>
+      <div className={styles.modal}>{children}</div>
+    </>
   )
 }

@@ -16,7 +16,6 @@ export default function ListCard() {
   }
 
   const handleEdit = card => {
-    setEditCard(false)
     setCard(card)
     setEditCard(true)
   }
@@ -39,7 +38,7 @@ export default function ListCard() {
             }
       </ul>
 
-      { editCard && <FormCard {...card}/> }
+      { editCard && <FormCard card={card} /> }
     </>
   )
 }

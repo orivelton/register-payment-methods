@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import FormCard from '../components/FormCard'
 import ListCard from '../components/ListCard'
+import Modal from '../components/Modal'
 import cardsContext from '../hooks/context/cardsContext'
 // import Modal from '../components/Modal'
 
@@ -18,12 +19,13 @@ export default function Index({ cards }) {
       <h1>Your cards</h1>
       <h2>Add, edit or delete your cards any time</h2>
       <button onClick={handleAddCard}>Add card</button>
+
       <br />
       <cardsContext.Provider value={[card, setCard]}>
         <ListCard />
-        { addCard && <FormCard /> }
       </cardsContext.Provider>
-
+      { addCard && <FormCard handleClose={setAddCard} /> }
+      
     </>
   )
 }

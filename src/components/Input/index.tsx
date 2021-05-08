@@ -1,17 +1,17 @@
 import { InputCard } from '../../interfaces';
 
-export default function Input({ register, label, maxLength, placeholder, required = true, pattern, name, defaultValue }: InputCard) {
+export default function Input({ register, label, maxLength, placeholder, required = true, pattern, name, errors, message }: InputCard) {
   return(
     <>
       <label htmlFor={name}>{label}</label>
       <input 
         id={name} 
         {...register(name, { required, pattern, maxLength })}
-        defaultValue={defaultValue}  
         type="text" 
         maxLength={maxLength}
         placeholder={placeholder} 
       />
+      {errors?.[name] && <p>{message}</p>}
     </>
   )
 }
