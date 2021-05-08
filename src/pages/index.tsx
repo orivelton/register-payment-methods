@@ -23,8 +23,8 @@ export default function Index({ cards }) {
       <br />
       <cardsContext.Provider value={[card, setCard]}>
         <ListCard />
+        { addCard && <FormCard newCard handleClose={setAddCard} /> }
       </cardsContext.Provider>
-      { addCard && <FormCard handleClose={setAddCard} /> }
       
     </>
   )

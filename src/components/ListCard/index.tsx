@@ -25,10 +25,10 @@ export default function ListCard() {
       <ul>
         {
           cards.length ? (
-            cards.map(({ nameInCard, cardNumber, expiryDate, cvc}) => (
+            cards.map(({ nameInCard, cardNumber, expiryDate, cvc}, id) => (
               <li key={cardNumber}>
                 {nameInCard} | {cardNumber} | {expiryDate} | {cvc}
-                <button onClick={() => handleEdit({ nameInCard, cardNumber, expiryDate, cvc})}>edit</button>
+                <button onClick={() => handleEdit({ nameInCard, cardNumber, expiryDate, cvc, id})}>edit</button>
                 <button onClick={() => deleteCard(cardNumber)}>delete</button>
               </li>
             ))
@@ -38,7 +38,7 @@ export default function ListCard() {
             }
       </ul>
 
-      { editCard && <FormCard card={card} /> }
+      { editCard && <FormCard handleClose={setEditCard} card={card}/> }
     </>
   )
 }

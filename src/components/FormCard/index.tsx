@@ -1,30 +1,35 @@
 import { useForm } from 'react-hook-form'
 import Input from '../Input'
 import { Card } from '../../interfaces'
-import { useContext, useEffect, useMemo } from 'react'
+import { useContext, useEffect } from 'react'
 import cardsContext from '../../hooks/context/cardsContext'
 import { cardsRequest } from '../../services/cardsRequest'
 import Modal from '../Modal'
 
-export default function FormCard({ card, handleClose }) {
-  const[cards, setCards] = useContext(cardsContext)
+export default function FormCard({ card, handleClose, newCard = false, id }) {
+  const [cards, setCards] = useContext(cardsContext)
   const { register, handleSubmit, setError, reset, watch, setValue, formState: { errors } } = useForm<Card>({ defaultValues: card || {}})
 
   const onSubmit = async (data: Card ) => {
     const hasCard = cards.filter(item => item.cardNumber === data.cardNumber).length
 
-    if(hasCard) {
-      return setError('formError', {
-        type: "manual",
-        message: "You have the same card added"
-      })
-    }
+    if(hasCard && newCard) return setError('formError', { type: "manual", message: "You have the same card added"})
 
+    newCard ? addCard(data) : editCard(data)
+  }
+
+  const addCard = (data) => {
     setCards(prev => ([...prev, data]))
+    handleClose(false)
+  }
+  
+  const editCard = (data) => {
+    const updateCards = cards.map((item, index) => index === data.id ? (item = data) : item)
+    setCards(updateCards)
+    handleClose(false)
   }
   
   useEffect(() => { cardsRequest({ cards }) }, [cards])
-
   useEffect(() => { reset(card) }, [card])
 
   return(
