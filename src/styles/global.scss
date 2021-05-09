@@ -10,7 +10,6 @@
   font-display: swap;
 }
 
-
 * {
   font-family: 'Circular Book', 'Arial Narrow', Arial, sans-serif;
   box-sizing: border-box;
@@ -34,7 +33,9 @@ input:focus {
   font-weight: bold;
   font-size: em(30);
   &__secondary {
-    
+    color: $grey-90;
+    font-size: em(24);
+    margin-bottom: em(24);
   }
 }
 
