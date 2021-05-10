@@ -9,11 +9,10 @@ import Button from '../Button'
 
 export default function FormCard({ card, handleClose, newCard = false, id }) {
   const [cards, setCards] = useContext(cardsContext)
-  const { register, handleSubmit, setError, reset, watch, setValue, formState: { errors } } = useForm<Card>({ defaultValues: card || {}})
+  const { register, handleSubmit, setError, reset, setFocus, formState: { errors } } = useForm<Card>({ defaultValues: card || {}})
 
   const onSubmit = async (data: Card ) => {
     newCard ? addCard(data) : editCard(data)
-    
   }
   
   const addCard = (data) => {
@@ -44,7 +43,8 @@ export default function FormCard({ card, handleClose, newCard = false, id }) {
           label: 'Name in card', 
           placeholder: 'John Doe',
           errors,
-          message: 'Please fill in your name'
+          message: 'Please fill in your name',
+          autofocus: true
         }} />
         
 

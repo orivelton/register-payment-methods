@@ -11,7 +11,8 @@ export default function Input({
   name, 
   errors, 
   message,
-  valid 
+  valid,
+  autofocus = false
 }: InputCard) {
   return(
     <div className={styles.field}>
@@ -20,8 +21,10 @@ export default function Input({
         id={name} 
         {...register(name, { required, pattern, maxLength })}
         type="text" 
+        aria-invalid={errors?.[name] ? "true" : "false"}
         maxLength={maxLength}
         placeholder={placeholder} 
+        autoFocus={autofocus}
         className={`${styles.input} ${errors?.[name] && styles.input__error} ${valid && styles.input__valid}` }
       />
       {errors?.[name] && <p className={styles.error}>{message}</p>}

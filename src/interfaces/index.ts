@@ -19,7 +19,8 @@ export type InputCard = {
   defaultValue?: any,
   errors: any, 
   message?: string,
-  valid?: boolean
+  valid?: boolean,
+  autofocus?: boolean
 }
 
 export type ButtonType = {
