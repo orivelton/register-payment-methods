@@ -26,7 +26,7 @@ export type InputCard = {
 
 export type ButtonType = {
   text: string,
-  type: string,
+  type?: string,
   onClick?: Function,
   disabled?: boolean,
   variant?: string

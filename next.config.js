@@ -1,4 +1,7 @@
 module.exports = {
+  future: {
+    webpack5: true,
+  },
   sassOptions: {
     prependData: `
       $purple-60       :#4C00C2;
