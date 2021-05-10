@@ -3,8 +3,9 @@ import Button from '../components/Button'
 import FormCard from '../components/FormCard'
 import ListCard from '../components/ListCard'
 import cardsContext from '../hooks/context/cardsContext'
+import { Card } from '../interfaces'
 
-export default function Index({ cards }) {
+export default function Index({ cards }: Card[]) {
   const [card, setCard] = useState(cards || [])
   const [addCard, setAddCard] = useState(false)
 

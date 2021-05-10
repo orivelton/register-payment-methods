@@ -24,14 +24,15 @@
     border-bottom-color: $red-30;
     background: url('/images/form-error.svg') no-repeat right;
   }
-
-  &:valid[aria-invalid="false"]:not(:placeholder-shown) {
-    color: $green-30;
-    border-bottom-color: $green-30;
-    background: url('/images/form-success.svg') no-repeat right top;
+  
+  &[data-dirty="true"] {
+    &:valid:not(:placeholder-shown, [aria-invalid="true"]) {
+      color: $green-30;
+      border-bottom-color: $green-30;
+      background: url('/images/form-success.svg') no-repeat right top;
+    }
   }
 }
-
 
 .error {
   margin-top: em(7);

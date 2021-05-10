@@ -9,5 +9,5 @@ describe("CreditCard component", () => {
     
     expect(getByText(/mock name card/i)).toBeInTheDocument()
     expect(getByText(/1234567812345678/i)).toBeInTheDocument()
-  });
+  })
 })

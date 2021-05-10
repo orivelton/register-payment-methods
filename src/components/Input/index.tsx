@@ -10,16 +10,18 @@ export default function Input({
   name, 
   errors, 
   message,
-  autofocus = false
+  autofocus = false,
+  dirtyFields
 }: InputCard) {
   return(
     <div className={styles.field}>
       <label className={styles.label} htmlFor={name}>{label}</label>
       <input 
         id={name} 
-        {...register(name, { required: true, pattern , maxLength, minLength: 2 })}
+        {...register(name, { required: true, pattern , maxLength})}
         type="text" 
         aria-invalid={!!errors?.[name]}
+        data-dirty={dirtyFields?.[name]}
         maxLength={maxLength}
         placeholder={placeholder} 
         autoFocus={autofocus}

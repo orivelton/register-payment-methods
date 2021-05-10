@@ -1,4 +1,4 @@
-import { ButtonHTMLAttributes } from "react"
+import { MouseEventHandler } from "react"
 import { UseFormRegister } from "react-hook-form"
 
 export type Card = {
@@ -10,11 +10,6 @@ export type Card = {
   id?: number
 }
 
-type Pattern = {
-  value?: RegExp,
-  message?: string
-}
-
 export type InputCard = { 
   name: string
   register: UseFormRegister<any>, 
@@ -23,17 +18,17 @@ export type InputCard = {
   maxLength?: number,
   required?: boolean,
   pattern?:  RegExp,
-  defaultValue?: any,
   errors: any, 
   message?: string,
   valid?: boolean,
-  autofocus?: boolean
+  autofocus?: boolean,
+  dirtyFields: any
 }
 
 export type ButtonType = {
   text: string,
-  type?: ButtonHTMLAttributes<any> | string,
-  onClick?: Function,
+  type?: HTMLButtonElement | any
+  onClick?: MouseEventHandler,
   disabled?: boolean,
   variant?: string
 }

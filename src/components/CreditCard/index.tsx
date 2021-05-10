@@ -1,3 +1,4 @@
+import { ReactElement } from 'react'
 import Image from 'next/image'
 import { Card } from '../../interfaces'
 import styles from './CreditCard.module.scss'
@@ -7,7 +8,7 @@ export default function CreditCard({
   cardNumber,
   expiryDate,
   cvc
-}: Card) {
+}: Card): ReactElement {
   
   return(
     <div className={styles.card}>

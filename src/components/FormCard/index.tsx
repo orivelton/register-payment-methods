@@ -1,26 +1,30 @@
 import { ReactElement, useContext, useEffect } from 'react'
-import { useForm } from 'react-hook-form'
+import { useForm, useFormState } from 'react-hook-form'
 import Input from '../Input'
-import { Card } from '../../interfaces'
-import cardsContext from '../../hooks/context/cardsContext'
-import { cardsRequest } from '../../services/cardsRequest'
 import Modal from '../Modal'
 import Button from '../Button'
-import { expiryDateFormat } from '../../helpers/format'
 import CreditCard from '../CreditCard'
+import { Card } from '../../interfaces'
+import { expiryDateFormat } from '../../helpers/format'
+import cardsContext from '../../hooks/context/cardsContext'
+import { cardsRequest } from '../../services/cardsRequest'
 import styles from './FormCard.module.scss'
 
 type FormCardType = {
-  card: Card, 
-  handleClose: Function, 
-  newCard:boolean 
+  card: Card | any, 
+  handleClose?: Function, 
+  newCard?:boolean 
 }
 
 export default function FormCard({ card, handleClose, newCard = false }: FormCardType): ReactElement {
   const [cards, setCards] = useContext(cardsContext)
-  const { register, handleSubmit, reset, watch, setValue, formState: { errors } } = useForm<Card>({ defaultValues: card || {}})
+  const { register, handleSubmit, reset, watch, setValue, control, formState: { errors } } = useForm<Card>({ defaultValues: card || {}})
+  const { dirtyFields } = useFormState({ control });
+
   const expiryDateWatch = watch('expiryDate')
   const cardWatch = watch()
+
+  
 
 
   const onSubmit = async (data: Card ) => {
@@ -60,15 +64,17 @@ export default function FormCard({ card, handleClose, newCard = false }: FormCar
           !newCard && <CreditCard {...cardWatch} />
         }
         <form onSubmit={handleSubmit(onSubmit)}>
+          {console.log(dirtyFields)}
           <Input {...{ 
             register, 
             name: 'nameInCard', 
             label: 'Name in card', 
             placeholder: 'John Doe',
-            pattern: /[A-Za-z]+/,
+            pattern: /^.{2,}$/,
             errors,
             message: 'Please fill in your name',
-            autofocus: true
+            autofocus: true,
+            dirtyFields
           }} />
 
           <Input {...{ 
@@ -79,7 +85,8 @@ export default function FormCard({ card, handleClose, newCard = false }: FormCar
             pattern: /^[0-9]{16}$/,  
             maxLength: 16,
             errors,
-            message: 'Please enter a valid credit card number'
+            message: 'Please enter a valid credit card number',
+            dirtyFields
           }} />
 
           <Input {...{ 
@@ -90,7 +97,8 @@ export default function FormCard({ card, handleClose, newCard = false }: FormCar
             pattern: /([0-9]{2}[/]?){2}/,  
             maxLength: 5,
             errors,
-            message: 'Please enter a valid expiry date'
+            message: 'Please enter a valid expiry date',
+            dirtyFields
           }} />
           
           <Input {...{ 
@@ -101,7 +109,8 @@ export default function FormCard({ card, handleClose, newCard = false }: FormCar
             pattern: /^[0-9]{3}$/,  
             maxLength: 3,
             errors,
-            message: 'Please enter a valid security code'
+            message: 'Please enter a valid security code',
+            dirtyFields
           }} />
 
           <Button type="submit" text="Confirm" />
