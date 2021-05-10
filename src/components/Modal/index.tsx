@@ -7,7 +7,6 @@ type ModalType = {
   handleClose: Function
 }
 
-
 export default function Modal({ children, handleClose }: ModalType): ReactElement {
   return(
     <>
