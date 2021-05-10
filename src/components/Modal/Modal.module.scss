@@ -18,7 +18,6 @@
   width: 100%;
   max-width: em(450);
   background: #FFFFFF;
-  height: auto;
   overflow: auto;
   z-index: 2;
   position: fixed;
@@ -28,6 +27,7 @@
   right: 0;
   padding: em(56) em(33);
   border-radius: em(24) em(24) 0 0;
+  height: 85vh;
   &__close {
     position: absolute;
     right: em(30);
@@ -38,3 +38,4 @@
     top: em(24)
   }
 }
+

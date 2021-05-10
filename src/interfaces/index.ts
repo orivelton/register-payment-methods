@@ -1,11 +1,12 @@
-import { ErrorOption, UseFormRegister } from "react-hook-form"
+import { UseFormRegister } from "react-hook-form"
 
 export type Card = {
   nameInCard: string,
   cardNumber: string,
   expiryDate: string,
   cvc: string,
-  formError?: string
+  formError?: string,
+  id?: number
 }
 
 export type InputCard = { 
@@ -26,6 +27,7 @@ export type InputCard = {
 export type ButtonType = {
   text: string,
   type: string,
-  onClick: Function,
-  disabled?: boolean
+  onClick?: Function,
+  disabled?: boolean,
+  variant?: string
 }

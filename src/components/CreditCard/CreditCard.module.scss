@@ -1,0 +1,31 @@
+@import '../../styles/utils.scss';
+
+.card {
+  padding: em(24) em(16);
+  border-radius: em(16);
+  color: $white;
+  background: url('/images/card-background-shape.svg') $purple no-repeat right;
+
+  &__top {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-bottom: em(32);
+  }
+
+  &__rigth {
+    display: flex;
+    flex-flow: wrap;
+  }
+
+  &__label {
+    width: 50%;
+    display: flex;
+    justify-content: flex-end;
+    min-width: em(32);
+  }
+
+  &__bottom {
+    padding-top: em(32);
+  }
+}

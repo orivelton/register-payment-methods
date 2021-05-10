@@ -12,4 +12,10 @@
   &:disabled {
     background: $grey-20;
   }
+
+  &__delete {
+    background: none;
+    color: $grey-20;
+    margin-top: em(16);
+  }
 }

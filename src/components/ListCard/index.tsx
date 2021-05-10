@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react'
 import cardsContext from '../../hooks/context/cardsContext'
-import { cardsRequest } from '../../services/cardsRequest'
+import { Card } from '../../interfaces'
 import FormCard from '../FormCard'
 import styles from './ListCard.module.scss'
 
@@ -19,7 +19,7 @@ export default function ListCard() {
       <ul>
         {
           cards?.length ? (
-            cards.map(({ nameInCard, cardNumber, expiryDate, cvc}, id ) => (
+            cards.map(({ nameInCard, cardNumber, expiryDate, cvc} : Card, id ) => (
               <li key={cardNumber} className={styles.item} onClick={() => handleEdit({ nameInCard, cardNumber, expiryDate, cvc, id })}>
                 <span>{nameInCard}</span>
                 <span>{cardNumber?.slice(-4)}</span>
@@ -27,7 +27,7 @@ export default function ListCard() {
               </li>
             ))
             ) : (
-              <li className={styles.item}>No Cards to show yet, add your first card</li>
+              <li className={styles.item__empty}>Add your first card</li>
               )
             }
       </ul>

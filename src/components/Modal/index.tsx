@@ -1,7 +1,14 @@
 import Image from 'next/image'
+import { ReactElement } from 'react'
 import styles from './Modal.module.scss'
 
-export default function Modal({ children, handleClose }) {
+type ModalType = {
+  children: ReactElement,
+  handleClose: Function
+}
+
+
+export default function Modal({ children, handleClose }: ModalType): ReactElement {
   return(
     <>
       <div className={styles.overlay} onClick={() => { handleClose(false) }}></div>
