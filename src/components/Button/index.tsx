@@ -1,7 +1,7 @@
 import { ButtonType } from '../../interfaces'
 import styles from './Button.module.scss'
 
-export default function({
+export default function Button({
   text,
   type = "button",
   onClick,
