@@ -20,10 +20,10 @@ export default function ListCard() {
         {
           cards?.length ? (
             cards.map(({ nameInCard, cardNumber, expiryDate, cvc} : Card, id: number ) => (
-              <li key={cardNumber} className={styles.item} onClick={() => handleEdit({ nameInCard, cardNumber, expiryDate, cvc, id })}>
-                <span>{nameInCard}</span>
-                <span>{cardNumber?.slice(-4)}</span>
-                <span>{expiryDate}</span>
+              <li key={cardNumber} className={styles.item} onClick={() => handleEdit({ nameInCard, cardNumber, expiryDate, cvc, id })} data-cy={`${nameInCard + id}`}>
+                <span data-cy={nameInCard}>{nameInCard}</span>
+                <span data-cy={cardNumber?.slice(-4)}>{cardNumber?.slice(-4)}</span>
+                <span data-cy={expiryDate}>{expiryDate}</span>
               </li>
             ))
             ) : (

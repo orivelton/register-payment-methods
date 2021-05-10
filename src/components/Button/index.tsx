@@ -14,6 +14,7 @@ export default function Button({
       onClick={onClick}
       className={`${styles.btn} ${variant === 'delete' && styles.btn__delete}`}
       disabled={disabled}
+      data-cy={text}
     >
       {text}
     </button>

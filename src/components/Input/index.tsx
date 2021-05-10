@@ -26,6 +26,7 @@ export default function Input({
         placeholder={placeholder} 
         autoFocus={autofocus}
         className={`${styles.input} ${errors?.[name] && styles.input__error} ${valid && styles.input__valid}` }
+        data-cy={name}
       />
       {errors?.[name] && <p className={styles.error}>{message}</p>}
     </div>
