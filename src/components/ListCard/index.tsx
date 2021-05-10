@@ -1,19 +1,13 @@
-import { useContext, useState } from "react"
-import cardsContext from "../../hooks/context/cardsContext"
-import { cardsRequest } from "../../services/cardsRequest"
-import FormCard from "../FormCard"
+import { useContext, useState } from 'react'
+import cardsContext from '../../hooks/context/cardsContext'
+import { cardsRequest } from '../../services/cardsRequest'
+import FormCard from '../FormCard'
+import styles from './ListCard.module.scss'
 
 export default function ListCard() {
-  const [cards, setCards] = useContext(cardsContext)
+  const [cards] = useContext(cardsContext)
   const [editCard, setEditCard] = useState(false)
   const [card, setCard] = useState({})
-
-
-  const deleteCard = async id => {
-    const cardsUpdated = [...cards].filter(card => card.cardNumber !== id)
-    setCards(cardsUpdated)
-    cardsRequest({ cards: cardsUpdated})
-  }
 
   const handleEdit = card => {
     setCard(card)
@@ -24,16 +18,16 @@ export default function ListCard() {
     <>
       <ul>
         {
-          cards.length ? (
-            cards.map(({ nameInCard, cardNumber, expiryDate, cvc}, id) => (
-              <li key={cardNumber}>
-                {nameInCard} | {cardNumber} | {expiryDate} | {cvc}
-                <button onClick={() => handleEdit({ nameInCard, cardNumber, expiryDate, cvc, id})}>edit</button>
-                <button onClick={() => deleteCard(cardNumber)}>delete</button>
+          cards?.length ? (
+            cards.map(({ nameInCard, cardNumber, expiryDate, cvc}, id ) => (
+              <li key={cardNumber} className={styles.item} onClick={() => handleEdit({ nameInCard, cardNumber, expiryDate, cvc, id })}>
+                <span>{nameInCard}</span>
+                <span>{cardNumber?.slice(-4)}</span>
+                <span>{expiryDate}</span>
               </li>
             ))
             ) : (
-              <li>No Cards to show yet, add your first card</li>
+              <li className={styles.item}>No Cards to show yet, add your first card</li>
               )
             }
       </ul>

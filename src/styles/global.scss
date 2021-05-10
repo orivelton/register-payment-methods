@@ -17,6 +17,10 @@
   margin: 0;
 }
 
+ul li {
+  list-style: none;
+}
+
 ::-webkit-input-placeholder {
   color: $grey-20;
   font-weight: 400;

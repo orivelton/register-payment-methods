@@ -1,37 +1,53 @@
+import { ReactElement, useContext, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import Input from '../Input'
 import { Card } from '../../interfaces'
-import { useContext, useEffect } from 'react'
 import cardsContext from '../../hooks/context/cardsContext'
 import { cardsRequest } from '../../services/cardsRequest'
 import Modal from '../Modal'
 import Button from '../Button'
+import { expiryDateFormat } from '../../helpers/format'
 
-export default function FormCard({ card, handleClose, newCard = false, id }) {
+type FormCardType = {
+  card: Card, 
+  handleClose: Function, 
+  newCard:boolean 
+}
+
+export default function FormCard({ card, handleClose, newCard = false }: FormCardType): ReactElement {
   const [cards, setCards] = useContext(cardsContext)
-  const { register, handleSubmit, setError, reset, setFocus, formState: { errors } } = useForm<Card>({ defaultValues: card || {}})
+  const { register, handleSubmit, reset, watch, setValue, formState: { errors } } = useForm<Card>({ defaultValues: card || {}})
+  const expiryDateWatch = watch('expiryDate')
 
   const onSubmit = async (data: Card ) => {
     newCard ? addCard(data) : editCard(data)
   }
   
-  const addCard = (data) => {
+  const addCard = (data: Card) => {
     const hasCard = cards.filter(item => item.cardNumber === data.cardNumber).length
-    console.log(hasCard)
-    if(hasCard && newCard) return setError('formError', { type: "manual", message: "You have the same card added"})
 
     setCards(prev => ([...prev, data]))
     handleClose(false)
   }
   
-  const editCard = (data) => {
+  const editCard = (data: Card) => {
     const updateCards = cards.map((item, index) => index === data.id ? (item = data) : item)
     setCards(updateCards)
     handleClose(false)
   }
+
+  const deleteCard = () => {
+    const cardsUpdated = [...cards].filter(card => card.cardNumber !== card.cardNumber)
+    setCards(cardsUpdated)
+    cardsRequest({ cards: cardsUpdated})
+  }
   
   useEffect(() => { cardsRequest({ cards }) }, [cards])
   useEffect(() => { reset(card) }, [card])
+  useEffect(() => {
+    expiryDateWatch && setValue('expiryDate', `${expiryDateFormat(expiryDateWatch)}`)
+   }, [expiryDateWatch])
+
 
   return(
     <Modal handleClose={handleClose}>
@@ -46,9 +62,6 @@ export default function FormCard({ card, handleClose, newCard = false, id }) {
           message: 'Please fill in your name',
           autofocus: true
         }} />
-        
-
-        <br />
 
         <Input {...{ 
           register, 
@@ -61,20 +74,16 @@ export default function FormCard({ card, handleClose, newCard = false, id }) {
           message: 'Please enter a valid credit card number'
         }} />
 
-        <br />
-
         <Input {...{ 
           register, 
           name: 'expiryDate', 
           label: 'Expiry date', 
           placeholder: '00/00', 
-          pattern: /^[0-9]{5}$/,  
+          pattern: /([0-9]{2}[/]?){2}/,  
           maxLength: 5,
           errors,
           message: 'Please enter a valid expiry date'
         }} />
-
-        <br />
         
         <Input {...{ 
           register, 
@@ -86,10 +95,12 @@ export default function FormCard({ card, handleClose, newCard = false, id }) {
           errors,
           message: 'Please enter a valid security code'
         }} />
-        <br />
 
         <Button type="submit" text="Confirm" />
         {errors?.formError && errors.formError.message}
+
+        {!newCard && <button onClick={deleteCard}>Delete card</button>}
+        
       </form>
     </Modal>
   ) 

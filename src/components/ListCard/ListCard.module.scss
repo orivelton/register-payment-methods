@@ -1,0 +1,12 @@
+@import '../../styles/utils.scss';
+
+.item {
+  margin-top: em(8);
+  padding: em(8);
+  border: 1px solid $grey-20;
+  margin-bottom: em(8);
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
