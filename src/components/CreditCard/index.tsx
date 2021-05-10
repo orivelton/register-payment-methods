@@ -8,6 +8,7 @@ export default function CreditCard({
   expiryDate,
   cvc
 }: Card) {
+  
   return(
     <div className={styles.card}>
       <div className={styles.card__top}>

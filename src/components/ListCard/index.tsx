@@ -7,9 +7,9 @@ import styles from './ListCard.module.scss'
 export default function ListCard() {
   const [cards] = useContext(cardsContext)
   const [editCard, setEditCard] = useState(false)
-  const [card, setCard] = useState({})
+  const [card, setCard] = useState<Card | object>({})
 
-  const handleEdit = card => {
+  const handleEdit = (card: Card) => {
     setCard(card)
     setEditCard(true)
   }
@@ -19,7 +19,7 @@ export default function ListCard() {
       <ul>
         {
           cards?.length ? (
-            cards.map(({ nameInCard, cardNumber, expiryDate, cvc} : Card, id ) => (
+            cards.map(({ nameInCard, cardNumber, expiryDate, cvc} : Card, id: number ) => (
               <li key={cardNumber} className={styles.item} onClick={() => handleEdit({ nameInCard, cardNumber, expiryDate, cvc, id })}>
                 <span>{nameInCard}</span>
                 <span>{cardNumber?.slice(-4)}</span>
@@ -32,7 +32,7 @@ export default function ListCard() {
             }
       </ul>
 
-      { editCard && <FormCard handleClose={setEditCard} card={card}/> }
+      { editCard && <FormCard {...{ card, handleClose: setEditCard }}/> }
     </>
   )
 }
