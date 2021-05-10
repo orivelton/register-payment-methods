@@ -11,7 +11,6 @@ export default function Input({
   name, 
   errors, 
   message,
-  valid,
   autofocus = false
 }: InputCard) {
   return(
@@ -19,13 +18,16 @@ export default function Input({
       <label className={styles.label} htmlFor={name}>{label}</label>
       <input 
         id={name} 
-        {...register(name, { required, pattern, maxLength })}
+        {...register(name, { required, pattern: {
+          value: pattern,
+          message: message
+        }, maxLength })}
         type="text" 
-        aria-invalid={errors?.[name] ? "true" : "false"}
+        aria-invalid={!!errors?.[name]}
         maxLength={maxLength}
         placeholder={placeholder} 
         autoFocus={autofocus}
-        className={`${styles.input} ${errors?.[name] && styles.input__error} ${valid && styles.input__valid}` }
+        className={styles.input}
         data-cy={name}
       />
       {errors?.[name] && <p className={styles.error}>{message}</p>}

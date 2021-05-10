@@ -65,6 +65,7 @@ export default function FormCard({ card, handleClose, newCard = false }: FormCar
             name: 'nameInCard', 
             label: 'Name in card', 
             placeholder: 'John Doe',
+            pattern: /[A-Za-z]+/,
             errors,
             message: 'Please fill in your name',
             autofocus: true

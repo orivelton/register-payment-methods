@@ -18,18 +18,20 @@
   border-bottom: em(1) solid $grey-20;
   padding: em(5) 0;
   font-size: em(16);
-  &__error {
+
+  &[aria-invalid="true"] {
     color: $red-30;
     border-bottom-color: $red-30;
     background: url('/images/form-error.svg') no-repeat right;
   }
 
-  &__valid {
+  &[aria-invalid="false"]:not(:placeholder-shown) {
     color: $green-30;
     border-bottom-color: $green-30;
     background: url('/images/form-success.svg') no-repeat right top;
   }
 }
+
 
 .error {
   margin-top: em(7);
