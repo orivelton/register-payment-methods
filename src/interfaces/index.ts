@@ -1,4 +1,4 @@
-import { UseFormRegister } from "react-hook-form"
+import { ErrorOption, UseFormRegister } from "react-hook-form"
 
 export type Card = {
   nameInCard: string,
@@ -16,7 +16,10 @@ export type InputCard = {
   maxLength?: number,
   required?: boolean,
   pattern?: RegExp,
-  defaultValue?: any
+  defaultValue?: any,
+  errors: any, 
+  message?: string,
+  valid?: boolean
 }
 
 export type ButtonType = {

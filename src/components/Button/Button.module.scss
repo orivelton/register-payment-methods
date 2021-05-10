@@ -4,10 +4,10 @@
   border: 0;
   background: $purple-60;
   color: $white;
-  padding: em(10) em(20);
-  border-radius: em(30);
+  padding: em(16) em(4);
+  border-radius: em(24);
   width: 100%;
-  max-width: em(300);
+  max-width: em(450);
   font-size: em(16);
   &:disabled {
     background: $grey-20;

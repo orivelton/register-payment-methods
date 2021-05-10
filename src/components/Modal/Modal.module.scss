@@ -18,7 +18,8 @@
   width: 100%;
   max-width: em(450);
   background: #FFFFFF;
-  height: 80%;
+  height: auto;
+  overflow: auto;
   z-index: 2;
   position: fixed;
   bottom: 0;
@@ -34,5 +35,6 @@
     background: none;
     cursor: pointer;
     padding: em(5);
+    top: em(24)
   }
 }

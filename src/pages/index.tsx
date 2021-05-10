@@ -14,7 +14,7 @@ export default function Index({ cards }) {
   
 
   return(
-    <>
+    <div className="container">
       <h1 className="title">Your cards</h1>
       <h2 className="subtitle">Add, edit or delete your cards any time</h2>
       <Button text="Add new card" onClick={handleAddCard}/>
@@ -24,8 +24,7 @@ export default function Index({ cards }) {
         <ListCard />
         { addCard && <FormCard newCard handleClose={setAddCard} /> }
       </cardsContext.Provider>
-      
-    </>
+    </div>
   )
 }
 

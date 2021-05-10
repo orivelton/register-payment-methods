@@ -42,5 +42,11 @@ input:focus {
 .subtitle {
   color: $grey-90;
   font-size: em(16);
+}
 
+.container {
+  width: 100%;
+  max-width: em(450);
+  padding: em(40) em(24);
+  margin: auto;
 }
