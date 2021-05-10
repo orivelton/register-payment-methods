@@ -57,7 +57,7 @@ export default function FormCard({ card, handleClose, newCard = false }: FormCar
           {newCard ? 'Add your card details' : 'Edit your Card'}
         </h3>
         {
-          !newCard && <CreditCard {...{ card: cardWatch }}/>
+          !newCard && <CreditCard {...cardWatch} />
         }
         <form onSubmit={handleSubmit(onSubmit)}>
           <Input {...{ 

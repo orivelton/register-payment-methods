@@ -1,3 +1,4 @@
+import { ButtonHTMLAttributes } from "react"
 import { UseFormRegister } from "react-hook-form"
 
 export type Card = {
@@ -26,7 +27,7 @@ export type InputCard = {
 
 export type ButtonType = {
   text: string,
-  type?: string,
+  type?: ButtonHTMLAttributes<any>,
   onClick?: Function,
   disabled?: boolean,
   variant?: string

@@ -1,12 +1,13 @@
 import Image from 'next/image'
+import { Card } from '../../interfaces'
 import styles from './CreditCard.module.scss'
 
-export default function CreditCard({ card: {
+export default function CreditCard({
   nameInCard,
   cardNumber,
   expiryDate,
   cvc
-}}) {
+}: Card) {
   return(
     <div className={styles.card}>
       <div className={styles.card__top}>
