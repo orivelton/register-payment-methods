@@ -6,7 +6,6 @@ export default function Input({
   label, 
   maxLength, 
   placeholder, 
-  required = true, 
   pattern, 
   name, 
   errors, 
@@ -18,10 +17,7 @@ export default function Input({
       <label className={styles.label} htmlFor={name}>{label}</label>
       <input 
         id={name} 
-        {...register(name, { required, pattern: {
-          value: pattern,
-          message: message
-        }, maxLength })}
+        {...register(name, { required: true, pattern , maxLength, minLength: 2 })}
         type="text" 
         aria-invalid={!!errors?.[name]}
         maxLength={maxLength}

@@ -25,7 +25,7 @@
     background: url('/images/form-error.svg') no-repeat right;
   }
 
-  &[aria-invalid="false"]:not(:placeholder-shown) {
+  &:valid[aria-invalid="false"]:not(:placeholder-shown) {
     color: $green-30;
     border-bottom-color: $green-30;
     background: url('/images/form-success.svg') no-repeat right top;

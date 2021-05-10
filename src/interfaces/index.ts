@@ -10,6 +10,11 @@ export type Card = {
   id?: number
 }
 
+type Pattern = {
+  value?: RegExp,
+  message?: string
+}
+
 export type InputCard = { 
   name: string
   register: UseFormRegister<any>, 
@@ -17,7 +22,7 @@ export type InputCard = {
   placeholder: string,
   maxLength?: number,
   required?: boolean,
-  pattern?: RegExp,
+  pattern?:  RegExp,
   defaultValue?: any,
   errors: any, 
   message?: string,
@@ -27,7 +32,7 @@ export type InputCard = {
 
 export type ButtonType = {
   text: string,
-  type?: ButtonHTMLAttributes<any>,
+  type?: ButtonHTMLAttributes<any> | string,
   onClick?: Function,
   disabled?: boolean,
   variant?: string
