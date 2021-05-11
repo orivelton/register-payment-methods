@@ -5,7 +5,7 @@ import FormCard from '../FormCard'
 import styles from './ListCard.module.scss'
 
 export default function ListCard() {
-  const [cards] = useContext(cardsContext)
+  const [cards] = useContext<any>(cardsContext)
   const [editCard, setEditCard] = useState(false)
   const [card, setCard] = useState<Card | object>({})
 

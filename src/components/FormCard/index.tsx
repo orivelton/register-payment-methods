@@ -11,28 +11,25 @@ import { cardsRequest } from '../../services/cardsRequest'
 import styles from './FormCard.module.scss'
 
 type FormCardType = {
-  card: Card | any, 
-  handleClose?: Function, 
+  card?: Card | any, 
+  handleClose?: any, 
   newCard?:boolean 
 }
 
 export default function FormCard({ card, handleClose, newCard = false }: FormCardType): ReactElement {
-  const [cards, setCards] = useContext(cardsContext)
+  const [cards, setCards] = useContext<any>(cardsContext)
   const { register, handleSubmit, reset, watch, setValue, control, formState: { errors } } = useForm<Card>({ defaultValues: card || {}})
   const { dirtyFields } = useFormState({ control });
 
   const expiryDateWatch = watch('expiryDate')
   const cardWatch = watch()
-
   
-
-
   const onSubmit = async (data: Card ) => {
     newCard ? addCard(data) : editCard(data)
   }
   
   const addCard = (data: Card) => {
-    setCards(prev => ([...prev, data]))
+    setCards((prev: any) => ([...prev, data]))
     handleClose(false)
   }
   
@@ -64,7 +61,6 @@ export default function FormCard({ card, handleClose, newCard = false }: FormCar
           !newCard && <CreditCard {...cardWatch} />
         }
         <form onSubmit={handleSubmit(onSubmit)}>
-          {console.log(dirtyFields)}
           <Input {...{ 
             register, 
             name: 'nameInCard', 

@@ -1,4 +1,10 @@
-const cardsRequest = async ({ cards }) => {
+import { Card } from '../interfaces'
+type cardsRequestType = {
+  cards: Card[]
+}
+
+
+const cardsRequest = async ({ cards }: cardsRequestType) => {
   if(!cards) return
   const result = await fetch('/api/cards', {
     method: 'POST',

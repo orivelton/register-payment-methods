@@ -4,7 +4,7 @@ import styles from './Modal.module.scss'
 
 type ModalType = {
   children: ReactElement,
-  handleClose: Function
+  handleClose: Function | any
 }
 
 export default function Modal({ children, handleClose }: ModalType): ReactElement {

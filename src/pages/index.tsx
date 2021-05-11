@@ -1,19 +1,22 @@
-import { useState } from 'react'
+import { ReactElement, useState } from 'react'
 import Button from '../components/Button'
 import FormCard from '../components/FormCard'
 import ListCard from '../components/ListCard'
 import cardsContext from '../hooks/context/cardsContext'
 import { Card } from '../interfaces'
 
-export default function Index({ cards }: Card[]) {
-  const [card, setCard] = useState(cards || [])
+type IndexType = {
+  cards: Card[]
+}
+
+export default function Index({ cards }: IndexType): ReactElement {
+  const [card, setCard] = useState(cards)
   const [addCard, setAddCard] = useState(false)
 
   const handleAddCard = () => {
     setAddCard(true)
   }
   
-
   return(
     <div className="container">
       <h1 className="title">Your cards</h1>
@@ -30,6 +33,6 @@ export default function Index({ cards }: Card[]) {
   )
 }
 
-export async function getServerSideProps({ req }) {
+export async function getServerSideProps({ req }: any) {
   return { props: { cards: req.cookies.cards ? JSON.parse(req.cookies.cards) : [] } }
 }
