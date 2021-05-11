@@ -30,3 +30,5 @@ You can use `npm` or `yarn` to run these commands
 | `yarn jest`      | Run unit test                                              |
 | `yarn cy:open`   | Run E2E test                                               |
 
+
+[Google Lithouse](https://googlechrome.github.io/lighthouse/viewer/?psiurl=https%3A%2F%2Fregister-payment-methods.vercel.app%2F&strategy=mobile&category=performance&category=accessibility&category=best-practices&category=seo&category=pwa&utm_source=lh-chrome-ext#performance) 🚀
