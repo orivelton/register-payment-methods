@@ -40,7 +40,7 @@ export default function FormCard({ card, handleClose, newCard = false }: FormCar
   }
 
   const deleteCard = () => {
-    const cardsUpdated = [...cards].filter((card: Card) => card.cardNumber !== card.cardNumber)
+    const cardsUpdated = [...cards].filter((item: Card) => item.cardNumber !== card.cardNumber)
     setCards(cardsUpdated)
     cardsRequest({ cards: cardsUpdated})
   }
